@@ -16,25 +16,52 @@ async function fetchNews() {
 function displayNews(articles) {
 	const newsDiv = document.querySelector('#news');
 	for (const article of articles) {
-    	const articleDiv = document.createElement('div');
+		//first Div
+    	const firstDiv = document.createElement('div');
+		firstDiv.classList.add("card", "mb-3", "text-bg-secondary");
+		firstDiv.style.maxWidth = "540px";
+
+		//secoond div
+		const secondDiv = document.createElement('div');
+		secondDiv.classList.add("row", "g-0");
+		firstDiv.appendChild(secondDiv);
+
+		//third div
+		const thirdDiv = document.createElement('div');
+		thirdDiv.classList.add("col-md-4");
+		secondDiv.appendChild(thirdDiv);
+
+		// Img
+		const imgEl = document.createElement('img');
+		imgEl.src = article.urlToImage;
+		imgEl.classList.add("img-fluid", "rounded-start")
+		imgEl.alt = "News source image";
+		thirdDiv.appendChild(imgEl);
+
+		//third div 2
+		const third2Div = document.createElement('div');
+		third2Div.classList.add("col-md-8");
+		secondDiv.appendChild(third2Div);
+
+		//fourth div
+		const fourthDiv = document.createElement('div');
+		fourthDiv.classList.add("card-body");
+		third2Div.appendChild(fourthDiv);
 
 		// Create and append a headline to the articleDiv
-    	const title = document.createElement('h4');
+    	const title = document.createElement('h5');
+		title.classList.add("card-title");
     	title.textContent = article.title;
-    	articleDiv.appendChild(title);
+    	fourthDiv.appendChild(title);
 
 		// TODO: Use document.createElement and appendChild to create and append more elements
 		const descrEL = document.createElement('p');
+		descrEL.classList.add("card-text");
     	descrEL.textContent = article.description;
-    	articleDiv.appendChild(descrEL);
+    	fourthDiv.appendChild(descrEL);
 
-		const imgEl = document.createElement('img');
-		imgEl.src = article.urlToImage;
-		imgEl.alt = "News source image";
-		imgEl.width = 500;
-		articleDiv.appendChild(imgEl);
 
-		newsDiv.appendChild(articleDiv);
+		newsDiv.appendChild(firstDiv);
 	}
 }
   
